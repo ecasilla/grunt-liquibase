@@ -14,11 +14,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Configuration to be run (and then tested).
     liquibase: {
-      default_options: {
+      version : {
         options: {
         },
         command : 'version'
-      },
+      }
     }
   });
 
@@ -26,6 +26,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['liquibase']);
+  grunt.registerTask('test', ['liquibase']);
 
 };
