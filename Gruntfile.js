@@ -19,13 +19,25 @@ module.exports = function(grunt) {
         },
         command : 'version'
       }
+    },
+    jshint: {
+      all: [
+        'Gruntfile.js',
+        'tasks/*.js',
+      ],
+      options: {
+        jshintrc: '.jshintrc',
+      },
     }
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
-  // By default, lint and run all tests.
+  // load up jslint
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+
   grunt.registerTask('test', ['liquibase']);
 
+  grunt.registerTask('default', ['jshint', 'test']);
 };

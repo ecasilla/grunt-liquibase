@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 
     grunt.verbose.writeln("Will excecute:" + cmd);
 
-    if (cmd == 'update') {
+    if (cmd === 'update') {
       if(options.username === undefined) {
         throw new Error('`username` must be specified');
       }
@@ -50,12 +50,12 @@ module.exports = function(grunt) {
                           ' --url ' + options.url +
                           ' --driver ' + options.driver +
                           ' --classpath ' + options.classpath +
-                          ' update'
-    } else if(cmd == 'version') {
+                          ' update';
+    } else if(cmd === 'version') {
       // this is the command we need to run
       liquibaseCommand += ' --version';
     } else {
-      throw new Error('`command` must be either update or version')
+      throw new Error('`command` must be either update or version');
     }
 
     grunt.verbose.writeln('Command:', chalk.yellow(liquibaseCommand));
@@ -81,6 +81,5 @@ module.exports = function(grunt) {
     // capture the output from liquibase and piipe it out
     captureOutput(cp.stdout, process.stdout);
     captureOutput(cp.stderr, process.stderr);
-
   });
 };
