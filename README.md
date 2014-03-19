@@ -25,13 +25,16 @@ In your project's Gruntfile, add a section named `liquibase` to the data object 
 ```js
 grunt.initConfig({
 	liquibase : {
+		options: {
+			username : 'DB_USERNAME',
+			password : 'DB_PASSWORD',
+			url : 'jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME'
+		},
 		update: {
-			options: {
-				username : 'DB_USERNAME',
-				password : 'DB_PASSWORD',
-				url : 'jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME'
-			},
 			command: 'update'
+		},
+		dropAll: {
+			command: 'dropAll'
 		},
 		version : {
 			command: 'version'

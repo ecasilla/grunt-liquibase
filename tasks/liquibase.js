@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 
     grunt.verbose.writeln("Will excecute:" + cmd);
 
-    if (cmd === 'update') {
+    if (cmd === 'update' || cmd == 'dropAll') {
       if(options.username === undefined) {
         throw new Error('`username` must be specified');
       }
@@ -42,15 +42,16 @@ module.exports = function(grunt) {
       if(options.url === undefined) {
         throw new Error('`url` must be specified');
       }
-
       // this is the command we need to run
-      liquibaseCommand += ' --changeLogFile ' + options.changeLogFile +
-                          ' --username ' + options.username +
+      liquibaseCommand += ' --username ' + options.username +
                           ' --password ' + options.password +
                           ' --url ' + options.url +
                           ' --driver ' + options.driver +
-                          ' --classpath ' + options.classpath +
-                          ' update';
+                          ' --classpath ' + options.classpath;
+      if(cmd ==='update') {
+        liquibaseCommand += ' --changeLogFile ' + options.changeLogFile;
+      }
+      liquibaseCommand += ' ' + cmd;
     } else if(cmd === 'version') {
       // this is the command we need to run
       liquibaseCommand += ' --version';
