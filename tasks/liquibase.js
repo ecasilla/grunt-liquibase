@@ -32,11 +32,11 @@ module.exports = function(grunt) {
     var cmdAttr = this.data.commandAttr || '';
 
     var supportedCommands = [
-        "update",
-        "dropAll",
-        "rollback",
-        "rollbackCount",
-        "tag"
+      "update",
+      "dropAll",
+      "rollback",
+      "rollbackCount",
+      "tag"
     ];
 
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
       // this is the command we need to run
       for(optionName in options) {
         //if the option is not a falsy (except zero), add to command options
-        if (options[optionName] || options[optionName] === 0) {
+        if (optionName !== 'changeLogFile'&& (options[optionName] || options[optionName] === 0)) {
           liquibaseCommand += ' --' + optionName + ' ' + options[optionName];
         }
       }
@@ -76,6 +76,7 @@ module.exports = function(grunt) {
 
     grunt.verbose.writeln('Command:', chalk.yellow(liquibaseCommand));
 
+    // Do not execute command if no-write is set
     if (grunt.option('no-write')) {
         grunt.log.ok('no-write specified, not running command');
         return;
