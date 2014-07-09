@@ -24,15 +24,28 @@ module.exports = function(grunt) {
       changeLogFile : 'changelog.xml',
       classpath : path.join(__dirname, '..', 'lib', 'postgresql-9.3-1100.jdbc41.jar'),
       driver : 'org.postgresql.Driver',
+      defaultSchemaName : null,
+      logLevel: 'info',
+      defaultsFile: null
     });
     var cmd = this.data.command;
+    var cmdAttr = this.data.commandAttr || '';
+
+    var supportedCommands = [
+        "update",
+        "dropAll",
+        "rollback",
+        "rollbackCount",
+        "tag"
+    ];
 
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
     var liquibaseCommand = 'java -jar ' + liquibaseJarLocation;
+    var optionName;
 
     grunt.verbose.writeln("Will excecute:" + cmd);
 
-    if (cmd === 'update' || cmd == 'dropAll') {
+    if (supportedCommands.indexOf(cmd) >= 0) {
       if(options.username === undefined) {
         throw new Error('`username` must be specified');
       }
@@ -43,24 +56,30 @@ module.exports = function(grunt) {
         throw new Error('`url` must be specified');
       }
       // this is the command we need to run
-      liquibaseCommand += ' --username ' + options.username +
-                          ' --password ' + options.password +
-                          ' --url ' + options.url +
-                          ' --driver ' + options.driver +
-                          ' --classpath ' + options.classpath;
-      if(cmd ==='update') {
+      for(optionName in options) {
+        //if the option is not a falsy (except zero), add to command options
+        if (options[optionName] || options[optionName] === 0) {
+          liquibaseCommand += ' --' + optionName + ' ' + options[optionName];
+        }
+      }
+      //dropAll does not need a changeLogFile
+      if(cmd !== 'dropAll') {
         liquibaseCommand += ' --changeLogFile ' + options.changeLogFile;
       }
-      liquibaseCommand += ' ' + cmd;
+      liquibaseCommand += ' ' + cmd + ' ' + cmdAttr;
     } else if(cmd === 'version') {
       // this is the command we need to run
       liquibaseCommand += ' --version';
     } else {
-      throw new Error('`command` must be either update or version');
+      throw new Error('`command` must be one of the following: ' + supportedCommands.join(', '));
     }
 
     grunt.verbose.writeln('Command:', chalk.yellow(liquibaseCommand));
 
+    if (grunt.option('no-write')) {
+        grunt.log.ok('no-write specified, not running command');
+        return;
+    }
     // spawn the process
     var cp = exec(liquibaseCommand, options.execOptions, function (err, stdout, stderr) {
       if (err) {
