@@ -54,7 +54,7 @@ Produces:
 ```shell
 ...
 Will excecute:update
-Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --changeLogFile changelog.xml --classpath /Users/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar --driver org.postgresql.Driver --logLevel info --username test_username --password test_password --url jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME --changeLogFile changelog.xml update 
+Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --classpath /Users/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar --driver org.postgresql.Driver --logLevel info --username test_username --password test_password --url jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME --changeLogFile changelog.xml update 
 >> no-write specified, not running command
 ```
 
