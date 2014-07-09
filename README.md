@@ -43,6 +43,21 @@ grunt.initConfig({
 });
 ```
 
+### Dry Run Support
+If running grunt with the `--no-write` CLI flag, then no liquibase commands will be excuted. This is useful for performing a dry run to verify that the liquibase commands are being formed as you expect.
+
+#### Example:
+```shell
+grunt liquibase:update --no-write --verbose
+```
+Produces:
+```shell
+...
+Will excecute:update
+Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --changeLogFile changelog.xml --classpath /Users/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar --driver org.postgresql.Driver --logLevel info --username test_username --password test_password --url jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME --changeLogFile changelog.xml update 
+>> no-write specified, not running command
+```
+
 ### Options
 
 #### options.username
@@ -93,6 +108,12 @@ Type: `String`
 Default value: `null`
 
 Liquibase properties file path
+
+#### options.logLevel
+Type: `String`
+Default value: `info`
+
+Liquibase logLevel
 
 ### Supported Commands
 
