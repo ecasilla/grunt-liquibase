@@ -24,23 +24,38 @@ In your project's Gruntfile, add a section named `liquibase` to the data object 
 
 ```js
 grunt.initConfig({
-	liquibase : {
-		options: {
-			username : 'DB_USERNAME',
-			password : 'DB_PASSWORD',
-			url : 'jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME'
-		},
-		update: {
-			command: 'update'
-		},
-		dropAll: {
-			command: 'dropAll'
-		},
-		version : {
-			command: 'version'
-		}
-	},
+  liquibase : {
+    options: {
+      username : 'DB_USERNAME',
+      password : 'DB_PASSWORD',
+      url : 'jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME'
+    },
+    update: {
+      command: 'update'
+    },
+    dropAll: {
+      command: 'dropAll'
+    },
+    version : {
+      command: 'version'
+    }
+  },
 });
+```
+
+### Dry Run Support
+If running grunt with the `--no-write` CLI flag, then no liquibase commands will be excuted. This is useful for performing a dry run to verify that the liquibase commands are being formed as you expect.
+
+#### Example:
+```shell
+grunt liquibase:update --no-write --verbose
+```
+Produces:
+```shell
+...
+Will excecute:update
+Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --classpath /Users/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar --driver org.postgresql.Driver --logLevel info --username test_username --password test_password --url jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME --changeLogFile changelog.xml update 
+>> no-write specified, not running command
 ```
 
 ### Options
@@ -82,6 +97,98 @@ Default value: `org.postgresql.Driver`
 
 JDBC driver class. Passed into the `--driver` argument to liquibase.
 
+#### options.defaultSchemaName
+Type: `String`
+Default value: `null`
+
+Default schema name
+
+#### options.defaultsFile
+Type: `String`
+Default value: `null`
+
+Liquibase properties file path
+
+#### options.logLevel
+Type: `String`
+Default value: `info`
+
+Liquibase logLevel
+
+### Supported Commands
+
+#### update
+Runs all changesets in the changeLogFile
+
+#### dropAll
+Drops all database objects owned by the user. Note that functions, procedures and packages are not dropped
+
+#### rollback
+Rollback changesets in the changeLogFile to a specific tag. Must also supply the target tag as the commandAttr.
+
+##### Example
+Rollback to version 0.0.1
+
+```js
+grunt.initConfig({
+  liquibase: {
+    options: {
+      username : 'dbuser',
+      password : 'passwd',
+      url : 'jdbc:postgresql://localhost:5432/test_db'
+    },
+    rollback: {
+      command: 'rollback',
+      commandAttr: 'v0.0.1'
+    }
+  },
+});
+```
+
+#### rollbackCount
+Rollback up to N changesets in the changeLogFile. Must also supply the number of changesets to rollback in the commandAttr.
+
+##### Example
+Rollback the last 3 changesets
+
+```js
+grunt.initConfig({
+  liquibase: {
+    options: {
+      username : 'dbuser',
+      password : 'passwd',
+      url : 'jdbc:postgresql://localhost:5432/test_db'
+    },
+    rollback: {
+      command: 'rollbackCount',
+      commandAttr: '3'
+    }
+  },
+});
+```
+
+#### tag
+"Tags" the current database state for future rollback. Must also supply the desired tag name in the commadAttr.
+
+##### Example
+Tag the current DB with `v0.1.2`.
+
+```js
+grunt.initConfig({
+  liquibase: {
+    options: {
+      username : 'dbuser',
+      password : 'passwd',
+      url : 'jdbc:postgresql://localhost:5432/test_db'
+    },
+    tag: {
+      command: 'tag',
+      commandAttr: 'v0.1.2'
+    }
+  },
+});
+```
+
 ### Usage Examples
 
 #### Default Options
@@ -91,9 +198,9 @@ In this example, the default options are used to update a postgresql database ca
 grunt.initConfig({
   liquibase: {
     options: {
-    	username : 'dbuser',
-		password : 'passwd',
-		url : 'jdbc:postgresql://localhost:5432/test_db'
+      username : 'dbuser',
+      password : 'passwd',
+      url : 'jdbc:postgresql://localhost:5432/test_db'
     },
     command: 'update'
   },
@@ -107,10 +214,10 @@ In this example, the location of the changelog file is modified.
 grunt.initConfig({
   liquibase: {
     options: {
-    	username : 'dbuser',
-		password : 'passwd',
-		url : 'jdbc:postgresql://localhost:5432/test_db',
-		changelog : 'src/database/dbchangelog.xml'
+      username : 'dbuser',
+      password : 'passwd',
+      url : 'jdbc:postgresql://localhost:5432/test_db',
+      changelog : 'src/database/dbchangelog.xml'
     },
     command: 'update'
   },
