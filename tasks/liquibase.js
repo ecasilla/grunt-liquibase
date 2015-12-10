@@ -36,8 +36,11 @@ module.exports = function(grunt) {
       "dropAll",
       "rollback",
       "rollbackCount",
+      "changeLogSync",
+      "changeLogSyncSQL",
+      "clearCheckSums",
       "tag"
-    ];
+    ];        
 
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
     var liquibaseCommand = 'java -jar ' + liquibaseJarLocation;
