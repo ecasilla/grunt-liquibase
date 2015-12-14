@@ -36,8 +36,11 @@ module.exports = function(grunt) {
       "dropAll",
       "rollback",
       "rollbackCount",
+      "changelogSync",
+      "changelogSyncSQL",
+      "clearCheckSums",
       "tag"
-    ];
+    ];        
 
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
     var liquibaseCommand = 'java -jar ' + liquibaseJarLocation;
@@ -99,7 +102,7 @@ module.exports = function(grunt) {
       }
     };
 
-    // capture the output from liquibase and piipe it out
+    // capture the output from liquibase and pipe it out
     captureOutput(cp.stdout, process.stdout);
     captureOutput(cp.stderr, process.stderr);
   });
