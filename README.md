@@ -189,6 +189,15 @@ grunt.initConfig({
 });
 ```
 
+#### changelogSync
+Marks all changesets in the changeLogFile as run in the database. Useful when you are not starting from a empty database.
+
+#### changelogSyncSQL
+Outputs the SQL to mark all changesets in the changeLogFile as run in the database. This allows DBAs to validate the SQL and then run it manually against the necessary database.
+
+#### clearCheckSums
+Clears checksums so they can be recalculated in the next run.
+
 ### Usage Examples
 
 #### Default Options

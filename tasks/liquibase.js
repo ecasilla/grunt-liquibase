@@ -22,7 +22,7 @@ module.exports = function(grunt) {
     // merge defaults with the passed in options
     var options = this.options({
       changeLogFile : 'changelog.xml',
-      classpath : path.join(__dirname, '..', 'lib', 'postgresql-9.4-1206.jdbc41.jar'),
+      classpath : path.join(__dirname, '..', 'lib', 'postgresql-9.4-1206-jdbc41.jar'),
       driver : 'org.postgresql.Driver',
       defaultSchemaName : null,
       logLevel: 'info',
