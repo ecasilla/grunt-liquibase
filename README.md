@@ -2,6 +2,8 @@
 
 > Simple integration of liquibase with grunt - specifically for postgresql (the postgresql jdbc driver is bundled as part of the module - if you want to add more support then feel free to fork)
 
+[![Build Status](https://travis-ci.org/sameetn/grunt-liquibase.svg?branch=master)](https://travis-ci.org/sameetn/grunt-liquibase)
+
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
 
@@ -54,7 +56,7 @@ Produces:
 ```shell
 ...
 Will excecute:update
-Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --classpath /Users/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar --driver org.postgresql.Driver --logLevel info --username test_username --password test_password --url jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME --changeLogFile changelog.xml update 
+Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --classpath /Users/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar --driver org.postgresql.Driver --logLevel info --username test_username --password test_password --url jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME --changeLogFile changelog.xml update
 >> no-write specified, not running command
 ```
 
