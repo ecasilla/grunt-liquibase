@@ -10,6 +10,8 @@
 
 var path = require('path');
 var chalk = require('chalk');
+// We should really explore the use of .spawn for streams, exec can run into buffer exceeded errors for
+// larger outputs
 var exec = require('child_process').exec;
 
 module.exports = function(grunt) {
@@ -40,7 +42,7 @@ module.exports = function(grunt) {
       "changelogSyncSQL",
       "clearCheckSums",
       "tag"
-    ];        
+    ];
 
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
     var liquibaseCommand = 'java -jar ' + liquibaseJarLocation;
@@ -61,7 +63,8 @@ module.exports = function(grunt) {
       // this is the command we need to run
       for(optionName in options) {
         //if the option is not a falsy (except zero), add to command options
-        if (optionName !== 'changeLogFile'&& (options[optionName] || options[optionName] === 0)) {
+        if (optionName !== 'changeLogFile' && (optionName !== 'execOptions')
+            && (options[optionName] || options[optionName] === 0)) {
           liquibaseCommand += ' --' + optionName + ' ' + options[optionName];
         }
       }

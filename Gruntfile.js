@@ -8,95 +8,48 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+var path = require('path');
 
-  var path = require('path');
+module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
     // Configuration to be run (and then tested).
     liquibase: {
+      // Common options to be used for testing all commands
+      options: {
+        classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
+        url: 'jdbc:hsqldb:mem:testdb',
+        username: 'sa',
+        password: '',
+        changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
+        driver: 'org.hsqldb.jdbcDriver'
+      },
       version: {
         options: {
         },
         command: 'version'
       },
       update: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'update'
       },
       dropAll: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'dropAll'
       },
       changelogSync: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'changelogSync'
       },
       changelogSyncSQL: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'changelogSyncSQL'
       },
       tag: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'tag',
         commandAttr: 'v1'
       },
       clearCheckSums: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'clearCheckSums'
       },
       rollbackCount: {
-        options: {
-          classpath: path.join(__dirname, 'test', 'hsqldb-2.3.3.jar'),
-          url: 'jdbc:hsqldb:mem:testdb',
-          username: 'sa',
-          password: '',
-          changeLogFile: path.join(__dirname, 'test/fixtures', 'changelog.xml'),
-          driver: 'org.hsqldb.jdbcDriver'
-        },
         command: 'rollbackCount',
         commandAttr: '1'
       }
@@ -104,11 +57,11 @@ module.exports = function(grunt) {
     jshint: {
       all: [
         'Gruntfile.js',
-        'tasks/*.js',
+        'tasks/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     }
   });
 
