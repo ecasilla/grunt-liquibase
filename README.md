@@ -1,4 +1,4 @@
-# grunt-liquibase  [![Build Status](https://travis-ci.org/cgreening/grunt-liquibase.svg?branch=master)](https://travis-ci.org/cgreening/grunt-liquibase) [![Code Climate](https://codeclimate.com/github/cgreening/grunt-liquibase/badges/gpa.svg)](https://codeclimate.com/github/cgreening/grunt-liquibase) [![Issue Count](https://codeclimate.com/github/cgreening/grunt-liquibase/badges/issue_count.svg)](https://codeclimate.com/github/cgreening/grunt-liquibase)
+# grunt-liquibase  [![Build Status](https://travis-ci.org/sameetn/grunt-liquibase.svg?branch=master)](https://travis-ci.org/sameetn/grunt-liquibase) [![Code Climate](https://codeclimate.com/github/cgreening/grunt-liquibase/badges/gpa.svg)](https://codeclimate.com/github/cgreening/grunt-liquibase) [![Issue Count](https://codeclimate.com/github/cgreening/grunt-liquibase/badges/issue_count.svg)](https://codeclimate.com/github/cgreening/grunt-liquibase)
 
 > Simple integration of liquibase with grunt - specifically for postgresql (the postgresql jdbc driver is bundled as part of the module - if you want to add more support then feel free to fork)
 
