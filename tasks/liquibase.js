@@ -41,6 +41,7 @@ module.exports = function(grunt) {
       "changelogSync",
       "changelogSyncSQL",
       "clearCheckSums",
+      "updateTestingRollback",
       "tag"
     ];
 

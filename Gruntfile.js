@@ -52,6 +52,9 @@ module.exports = function(grunt) {
       rollbackCount: {
         command: 'rollbackCount',
         commandAttr: '1'
+      },
+     updateTestingRollback: {
+        command: 'updateTestingRollback'
       }
     },
     jshint: {
