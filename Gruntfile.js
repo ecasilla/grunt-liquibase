@@ -55,6 +55,9 @@ module.exports = function(grunt) {
       },
      updateTestingRollback: {
         command: 'updateTestingRollback'
+      },
+     updateSQL : {
+        command : 'updateSQL'
       }
     },
     jshint: {
