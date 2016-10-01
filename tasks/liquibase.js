@@ -28,21 +28,42 @@ module.exports = function(grunt) {
       driver : 'org.postgresql.Driver',
       defaultSchemaName : null,
       logLevel: 'info',
-      defaultsFile: null
+      defaultsFile: null,
+      execOptions : {
+	     maxBuffer : Infinity
+      }
     });
     var cmd = this.data.command;
     var cmdAttr = this.data.commandAttr || '';
 
     var supportedCommands = [
       "update",
-      "dropAll",
+      "updateCount",
+      "updateSQL",
+      "updateCountSQL",
       "rollback",
+      "rollbackToDate",
       "rollbackCount",
+      "rollbackSQL",
+      "rollbackToDateSQL",
+      "rollbackCountSQL",
+      "futureRollbackSQL",
+      "updateTestingRollback",
+      "generateChangeLog",
+      "diff",
+      "diffChangeLog",
+      "dbDoc",
+      "tag",
+      "tagExists",
+      "status",
+      "validate",
       "changelogSync",
       "changelogSyncSQL",
-      "clearCheckSums",
-      "updateTestingRollback",
-      "tag"
+      "markNextChangeSetRan",
+      "listLocks",
+      "releaseLocks",
+      "dropAll",
+      "clearCheckSums"
     ];
 
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
