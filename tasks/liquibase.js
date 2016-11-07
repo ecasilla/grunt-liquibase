@@ -19,13 +19,11 @@ module.exports = function(grunt) {
 // Please see the Grunt documentation for more information regarding task
 // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('liquibase', 'Simple integration of liquibase with grunt - specifically for postgresql', function() {
+  grunt.registerMultiTask('liquibase', 'Simple integration of liquibase with grunt', function() {
     var cb = this.async();
     // merge defaults with the passed in options
     var options = this.options({
       changeLogFile : 'changelog.xml',
-      classpath : path.join(__dirname, '..', 'lib', 'postgresql-9.4-1206-jdbc41.jar'),
-      driver : 'org.postgresql.Driver',
       defaultSchemaName : null,
       logLevel: 'info',
       defaultsFile: null,
@@ -109,6 +107,7 @@ module.exports = function(grunt) {
         grunt.log.ok('no-write specified, not running command');
         return;
     }
+    console.log("grunt-liquibase: cmd:", liquibaseCommand, "opt:", options.execOptions);
     // spawn the process
     var cp = exec(liquibaseCommand, options.execOptions, function (err, stdout, stderr) {
       if (err) {

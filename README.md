@@ -1,9 +1,9 @@
 # grunt-liquibase  [![Build Status](https://travis-ci.org/sameetn/grunt-liquibase.svg?branch=master)](https://travis-ci.org/sameetn/grunt-liquibase) [![Code Climate](https://codeclimate.com/github/cgreening/grunt-liquibase/badges/gpa.svg)](https://codeclimate.com/github/cgreening/grunt-liquibase) [![Issue Count](https://codeclimate.com/github/cgreening/grunt-liquibase/badges/issue_count.svg)](https://codeclimate.com/github/cgreening/grunt-liquibase)
 
-> Simple integration of liquibase with grunt - specifically for postgresql (the postgresql jdbc driver is bundled as part of the module - if you want to add more support then feel free to fork)
+> Simple integration of liquibase with grunt - plugins for DB drivers exist for postgresql, mysql
 
 ## Getting Started
-This plugin requires Grunt `~0.4.2`
+This plugin requires Grunt `>=0.4.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
