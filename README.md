@@ -8,13 +8,19 @@ This plugin requires Grunt `>=0.4.0`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-liquibase --save-dev
+npm install flocsy/grunt-liquibase --save-dev
+```
+
+**Note**: In order to be able to use grunt-liquibase you need to install one of the database driver plugins as well:
+[PostgreSQL](https://www.npmjs.com/package/grunt-liquibase-postgresql), [MySQL](https://www.npmjs.com/package/grunt-liquibase-mysql)
+```shell
+npm install flocsy/grunt-liquibase-<DRIVER> --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-liquibase');
+grunt.loadNpmTasks('grunt-liquibase-<DRIVER>');
 ```
 
 ## The "liquibase" task
@@ -24,20 +30,37 @@ In your project's Gruntfile, add a section named `liquibase` to the data object 
 
 ```js
 grunt.initConfig({
-  liquibase : {
+  liquibase: {
+    options: {
+      username: 'DB_USERNAME',
+      password: 'DB_PASSWORD',
+      url: 'jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME'
+    },
+    updateSQL: {
+      command: 'updateSQL'
+    },
+    version: {
+      command: 'version'
+    }
+  },
+});
+```
+
+Optionally instead of the `url` you can pass the `hostname` and `database` in `driver_options` and let the driver-plugin to add the url for you:
+```js
+grunt.initConfig({
+  liquibase: {
     options: {
       username : 'DB_USERNAME',
-      password : 'DB_PASSWORD',
-      url : 'jdbc:postgresql://DB_HOST:DB_PORT/DB_NAME'
+      password : 'DB_PASSWORD'
     },
+    driver_options: {
+      hostname: 'localhost',
+      database: 'test_db'
+    },
+
     update: {
       command: 'update'
-    },
-    dropAll: {
-      command: 'dropAll'
-    },
-    version : {
-      command: 'version'
     }
   },
 });
