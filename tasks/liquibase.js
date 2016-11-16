@@ -64,8 +64,9 @@ module.exports = function(grunt) {
       "clearCheckSums"
     ];
 
+    var snakeyamlJarLocation = path.join(__dirname, '..', 'lib', 'snakeyaml-1.13.jar');
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
-    var liquibaseCommand = 'java -jar ' + liquibaseJarLocation;
+    var liquibaseCommand = 'java -cp ' + snakeyamlJarLocation + ' -jar ' + liquibaseJarLocation;
     var optionName;
 
     grunt.verbose.writeln("Will excecute:" + cmd);
