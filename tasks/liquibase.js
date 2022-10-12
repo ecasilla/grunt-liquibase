@@ -84,8 +84,7 @@ module.exports = function(grunt) {
       // this is the command we need to run
       for(optionName in options) {
         //if the option is not a falsy (except zero), add to command options
-        if (optionName !== 'changeLogFile' && (optionName !== 'execOptions')
-            && (options[optionName] || options[optionName] === 0)) {
+        if (optionName !== 'changeLogFile' && (optionName !== 'execOptions') && (options[optionName] || options[optionName] === 0)) {
           liquibaseCommand += ' --' + optionName + ' ' + options[optionName];
         }
       }
