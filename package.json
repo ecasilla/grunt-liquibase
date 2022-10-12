@@ -2,7 +2,7 @@
   "name": "grunt-liquibase",
   "description": "Simple integration of liquibase with grunt - core. Plugins for DB drivers exist for postgresql, mysql",
   "version": "1.0.1",
-  "homepage": "https://github.com/cgreening/grunt-liquibase",
+  "homepage": "https://github.com/ecasilla/grunt-liquibase",
   "author": {
     "name": "Chris Greening",
     "email": "chris@cmgresearch.com",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cgreening/grunt-liquibase.git"
+    "url": "git://github.com/ecasilla/grunt-liquibase.git"
   },
   "bugs": {
-    "url": "https://github.com/cgreening/grunt-liquibase/issues"
+    "url": "https://github.com/ecasilla/grunt-liquibase/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/cgreening/grunt-liquibase/blob/master/LICENSE-MIT"
+      "url": "https://github.com/ecasilla/grunt-liquibase/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
