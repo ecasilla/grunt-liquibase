@@ -1,7 +1,7 @@
 {
   "name": "grunt-liquibase",
   "description": "Simple integration of liquibase with grunt - core. Plugins for DB drivers exist for postgresql, mysql",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "homepage": "https://github.com/ecasilla/grunt-liquibase",
   "author": {
     "name": "Chris Greening",
