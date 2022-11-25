@@ -10,6 +10,7 @@
 
 var path = require('path');
 var chalk = require('chalk');
+var fs = require('fs');
 // We should really explore the use of .spawn for streams, exec can run into buffer exceeded errors for
 // larger outputs
 var exec = require('child_process').exec;
@@ -29,7 +30,8 @@ module.exports = function(grunt) {
       defaultsFile: null,
       execOptions : {
 	     maxBuffer : Infinity
-      }
+      },
+      liquibaseJarPath: null
     });
     var cmd = this.data.command;
     var cmdAttr = this.data.commandAttr || '';
@@ -64,8 +66,13 @@ module.exports = function(grunt) {
       "clearCheckSums"
     ];
 
-    var snakeyamlJarLocation = path.join(__dirname, '..', 'lib', 'snakeyaml-1.13.jar');
     var liquibaseJarLocation = path.join(__dirname, '..', 'lib', 'liquibase.jar');
+
+    if (fs.existsSync(options.liquibaseJarPath)) {
+      liquibaseJarLocation = options.liquibaseJarPath;
+    }
+
+    var snakeyamlJarLocation = path.join(__dirname, '..', 'lib', 'snakeyaml-1.13.jar');
     var liquibaseCommand = 'java -cp ' + snakeyamlJarLocation + ' -jar ' + liquibaseJarLocation;
     var optionName;
 
@@ -81,10 +88,11 @@ module.exports = function(grunt) {
       if(options.url === undefined) {
         throw new Error('`url` must be specified');
       }
+      var excludes = ['changeLogFile', 'execOptions', 'liquibaseJarPath'];
       // this is the command we need to run
       for(optionName in options) {
         //if the option is not a falsy (except zero), add to command options
-        if (optionName !== 'changeLogFile' && (optionName !== 'execOptions') && (options[optionName] || options[optionName] === 0)) {
+        if (excludes.indexOf(optionName) === -1 && (options[optionName] || options[optionName] === 0)) {
           liquibaseCommand += ' --' + optionName + ' ' + options[optionName];
         }
       }
