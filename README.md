@@ -83,6 +83,12 @@ Command: java -jar /Users/grunt-liquibase/lib/liquibase.jar --classpath /Users/g
 
 ### Options
 
+#### options.liquibaseJarPath
+Type: `String`
+Default value: `lib/liquibase.jar`
+
+Database jar path - passed into the `--liquibaseJarPath` argument to liquibase.
+
 #### options.username
 Type: `String`
 Default value: `NONE - required`

@@ -88,7 +88,7 @@ module.exports = function(grunt) {
       if(options.url === undefined) {
         throw new Error('`url` must be specified');
       }
-      const excludes = ['changeLogFile', 'execOptions', 'liquibaseJarPath'];
+      var excludes = ['changeLogFile', 'execOptions', 'liquibaseJarPath'];
       // this is the command we need to run
       for(optionName in options) {
         //if the option is not a falsy (except zero), add to command options
